@@ -1,0 +1,147 @@
+<ion-header>
+    <ion-toolbar> 
+      
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      
+      <div class="row d-flex justify-content-center">
+        <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+        </div>
+    </ion-toolbar> 
+  </ion-header>
+
+<ion-content>
+  <div  class="play-area content"> 
+
+  
+    <ion-fab *ngIf="!gameOver" vertical="top" horizontal="center" slot="fixed">
+        <ion-fab-button color="success">
+         <ion-row>
+           <h5 class="mt-2 p-3 font-weight-bold">{{timeMinute}} : {{timeSeconds}} </h5>
+         </ion-row>
+        </ion-fab-button>
+      </ion-fab>
+
+  
+      <!-- *ngFor="let item of accountService.leaderboard$; index as i" -->
+         <!-- <div >
+                  <ion-card-content>
+                    <ion-row>
+                      <ion-col  *ngFor="let item of accountService.leaderboardGameSection$" >
+                          <ion-avatar>
+                              <img class="leaders" src="../../assets/img/leader_icon.png" alt="">
+                            </ion-avatar><p class="font-weight-bold">{{item.user}} </p><br>
+                       </ion-col>
+                    </ion-row>
+                  </ion-card-content>
+        </div> -->
+  
+   
+
+      <ion-item-divider *ngIf="startGame" >
+         
+            <ion-segment>
+              <div class="animated" #correct>
+              <ion-label  class=" font-weight-bold text-success"> CORRECT : {{correctAns}}</ion-label>
+            </div>
+            </ion-segment>
+        
+          
+            <ion-segment >
+              <div class="animated" #wrong >
+              <ion-label class="animated font-weight-bold text-danger">WRONG : {{wrongAns}} </ion-label>
+            </div>
+            </ion-segment>
+          
+      </ion-item-divider>
+
+
+      <!-- question section -->
+      <ion-card *ngIf="startGame" class="m-0 play-area" style="width: 100%;" >
+          <div class="justify-content-right d-flex ml-2 ">
+                     <h3 class=" font-weight-bold" id="count"> {{runningQuestion + 1}}/15 </h3>  <!-- Default Segment -->
+          
+          </div>
+           
+           <ion-card-title><p class="m-4 text-white">{{currentQuestion?.question}} </p></ion-card-title>
+           <ion-card-content class="text-left mb-5">
+          
+               <ion-button color="success"  expand="full"  class="option mb-3" [disabled]="disableClick" 
+                (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer);">
+                  {{currentQuestion?.option1}} </ion-button>
+             
+                 <ion-button color="success" expand="full" class="option mb-3" [disabled]="disableClick"
+                  (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); ">
+                    {{currentQuestion?.option2}} </ion-button>
+             
+           
+                 <ion-button  color="success" expand="full"  class="option mb-3" [disabled]="disableClick"
+                 (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); ">
+                   {{currentQuestion?.option3}} </ion-button>
+             
+              
+                 <ion-button color="success" expand="full"  class="option mb-3" [disabled]="disableClick" 
+                  (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); ">
+                    {{currentQuestion?.option4}} </ion-button>
+             
+           </ion-card-content>
+           </ion-card>
+ 
+
+           <div *ngIf="!loadingGame" style="padding-top: 20%;">
+            <ion-card class="p-3">
+              <!-- select filter -->
+              <ion-item color="success" >
+                <ion-label color="light" class="text-center">select your category</ion-label>
+                <ion-select select="success" interface="popover" (ngModelChange)="selectChange($event)" 
+                [(ngModel)]="model.filterOptions">
+                  <ion-select-option class="text-dark" value="economics">Economics</ion-select-option>
+                  <ion-select-option color="success" value="sport">Sport</ion-select-option>
+                  <ion-select-option color="success" value="movie">Movie</ion-select-option>
+                  <ion-select-option color="success" value="science">Science</ion-select-option>
+                  <ion-select-option color="success" value="history">History</ion-select-option>
+                  <ion-select-option color="success" value="politics">Politics</ion-select-option>
+                  <ion-select-option color="success" value="arts">Art</ion-select-option>
+                  <ion-select-option  color="success" value="tourism">Tourism</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-card>
+
+              <ion-button expand="block" 
+                size="large" color="success"  *ngIf="!startGame" (click)="startQuestion()">
+                  PLAY NOW !</ion-button>
+                  <div class=" text-center  p-2 mt-5 animated infinite
+                   shake  " #info> 
+                    <p class="info"  *ngIf="!startGame">15 correct questions can give 5k</p>
+                  </div>
+           </div>
+ 
+             
+ 
+     <br>
+          <!-- <div class="justify-content-center d-flex" *ngIf="!startGame">
+              <img src="../../assets/animation/animated-playgame.gif" alt="">
+          </div> -->
+
+          <div *ngIf="low_balance"  class=" ">
+              <div class="toast-container mb-5">
+                <ion-chip>
+                  <!-- <ion-icon name="hand" color="danger"></ion-icon> -->
+                  <ion-label class="font-weight-bold text-danger"> YOUR ACCOUNT IS LOW! CLICK HERE  </ion-label> <br>
+                  <ion-icon [routerLink]="['/account']"  size="large" name="wallet" color="success"></ion-icon>
+                </ion-chip>
+              </div>
+            </div>
+
+                       <!-- loader -->
+                <div *ngIf="loadingGame" class=" ">
+                  <div class="toast-container ">
+                      <div class="lds-roller"><div></div><div></div><div></div><div></div>
+                      <div></div><div></div><div></div><div></div></div>
+                  </div>
+                  <p style="margin-top: 30%;" class="bg-dark  text-white text-center"> preparing questions...</p>
+                </div>
+              </div>
+        
+</ion-content> 

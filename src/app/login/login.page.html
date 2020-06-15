@@ -1,0 +1,118 @@
+<ion-content>
+  <div class=" content">
+
+    <ion-card class="scroll-content m-0">
+      <!-- <ion-card-header class=" pt-5 font-weight-bold"> LOGIN</ion-card-header> -->
+      <ion-card-content class="">
+
+        <!-- <div style="margin-top: 30% ;color:white;">
+          <h6 class=""> how much do you know?</h6>
+      <h6 class="font-weight-bold"> <strong color="sabi">show</strong> us </h6>
+
+      </div>  -->
+
+        <!-- loader -->
+        <div *ngIf="loading" class=" ">
+          <div class="toast-container ">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+
+        <form class="mt-5 form" #loginForm ngform="loginForm" name="form" (submit)="login(loginForm)">
+          <h1 class="text-center font-weight-bold text-white mb-4 pt-5">LOGIN</h1>
+          <div *ngIf="loading">
+            <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          </div>
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Phone</ion-label>
+            <ion-input class="ml-3" type="tel" #number name="number" clearInput [(ngModel)]="model.number"
+              autocomplete="off" minlength="11" required="true" [pattern]="phoneRegex"></ion-input>
+          </div>
+
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Password</ion-label>
+            <ion-input class="ml-3" type="password" input #password name="password" minlength="6"
+              [(ngModel)]="model.password" clearInput required="true">
+              <ion-icon (click)="password.type=password.type=='password'?'text':'password'" size="medium" name="eye">
+              </ion-icon>
+
+            </ion-input>
+          </div>
+
+
+
+          <p class="ml-3 text-white" [routerLink]="['/forgetpassword']">Forget login details?
+            <a style="color: rgb(191, 247, 191);">get help siging in</a> </p>
+
+
+          <div class="justify-content-center row pt-2">
+            <ion-button size="small" type="submit" color="light" (submit)="login(loginForm)">
+              <p style="color: #00351a;" class="font-weight-bold">LOGIN</p>
+            </ion-button>
+          </div>
+
+
+          <!-- <div class="justify-content-center row pt-2">
+              <ion-button (click)="facebookLogin();" size="small"
+               color="light"  class="primary-color-dark text-white">
+                  <ion-icon color="success"  name="logo-facebook" class="mr-2"></ion-icon> 
+                  login with facebook</ion-button>
+         
+          </div> -->
+
+        </form>
+
+        <h6 expand="full" color="success" class=" pt-4 text-center text-white mt-3" (click)="register()"
+          style="color: rgb(224, 253, 224);"> Don't have account? sign up</h6>
+
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="userService.networkDisconnet" id="snackbar">No internet connection</div>
+
+  </div>
+
+
+
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="alert"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-button color="success" size="small">
+        <a class=" info text-white" [routerLink]="['/testimonials']">
+          <ion-icon name="trophy"></ion-icon> TESTIMONIALS
+        </a>
+      </ion-button>
+      <ion-button color="success" size="small">
+        <a class=" info text-white" [routerLink]="['/howtoplay']">
+          <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
+        </a>
+      </ion-button>
+      <ion-button color="success" size="small">
+        <a class=" info text-white" [routerLink]="['/contactus']">
+          <ion-icon name="chatbubbles"></ion-icon> CONTACT US
+        </a>
+      </ion-button>
+      <ion-button color="success" size="small">
+        <a class="info text-white  " href="https:/i-sabi.com/faq/">
+          <ion-icon name="help"></ion-icon> FAQ
+        </a>
+      </ion-button>
+      <ion-button color="success" size="small">
+        <a class="info text-white  " href="https:/i-sabi.com/privacy-policy-2/">
+          <ion-icon name="list"></ion-icon> POLICY
+        </a>
+      </ion-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

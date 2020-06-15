@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="../../../assets/icon/Logoicon.png">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!-- fab placed to the top end -->
+  <ion-fab [routerLink]="['/gamesection']" vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon name="logo-game-controller-b"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- content area -->
+  <div class="content">
+    <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed" >
+      <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+    <div>
+      <div id="runner_up">
+
+        <h6 *ngIf="leaderBoard.length === 0 && !loading" class="text-white text-center" style="padding-top: 50%;">
+          <h6 class="animated infinite flash ">No user on leaderboard</h6>
+          <!-- <p>{{accountServive.leaderboard$.length | number}} </p> -->
+          <ion-card-content class="">This section is for nominated users with 15 correct question</ion-card-content>
+        </h6>
+
+        <ion-card class="pt-5">
+          <div class="runner-up" *ngFor="let item of leaderBoard; index as i">
+            <ion-list class="grey lighten-4 p-2">
+              <ion-row class=" winner lighten-2 p-2" [ngClass]="{'bg-danger': i+1 > 5}">
+                <ion-col>
+                  <ion-icon color="success" size="large" name="person"></ion-icon>
+                  <ion-chip class="position green lighten-2 font-weight-bold"
+                    [ngClass]="{' animated infinite rubberBand': i+1 < 6}"> {{i + 1}} </ion-chip>
+                </ion-col>
+                <ion-col>
+                  <h6 class=" leader "> {{item.user}} </h6>
+                </ion-col>
+                <ion-col>
+                  <small class="time_display text-success font-weight-bold
+                             ">ELAPSED {{item.minutes}} min : {{item.seconds}} secs </small>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </div>
+        </ion-card>
+
+      </div>
+    </div>
+    <!-- end content area -->
+  </div>
+
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

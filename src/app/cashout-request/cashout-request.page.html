@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="row d-flex justify-content-center">
+        <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+      </div> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab  vertical="top" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+
+  <div class="content pt-5">
+
+   
+      <h3 class="bg-dark text-center m-3 text-white"> CASHOUT LIST</h3>
+      <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed" >
+        <ion-refresher-content>
+        </ion-refresher-content>
+      </ion-refresher>
+
+      <div *ngFor="let item of cashoutList ; index as i">
+        <ion-list>
+          <ion-row class="pt-3">
+            <ion-chip color="success"> ₦{{item.amount}} </ion-chip>
+            <ion-chip color="success">{{item.username}} </ion-chip>
+            <ion-button class="pl-5" (click)="payout(item.amount, item.username, item._id)" >PAYOUT </ion-button>
+          </ion-row>
+        </ion-list>
+      </div>
+    
+          <!-- loader -->
+   <div *ngIf="loading">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+ 
+</ion-content> 

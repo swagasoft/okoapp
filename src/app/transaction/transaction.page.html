@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+        <div class="row d-flex justify-content-center">
+          <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+
+        </div>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-fab [routerLink]="['/gamesection']" vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button  color="light">
+        <ion-icon  name="logo-game-controller-b"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+<div class="">
+  
+
+
+  <ion-card class=" card text-white text-center" *ngFor="let item of transaction; index as i">
+    <ion-card-header class="text-white"> {{item.date | date:'full'}} </ion-card-header>
+    <ion-card-content>
+      <ion-list class="text-dark">
+<<<<<<< HEAD
+        <p class="font-weight-bold" *ngIf="item.amount">₦{{item?.amount}} </p>
+        <p class="font-weight-bold" *ngIf="item.mobile_amount">₦{{item?.mobile_amount}} </p>
+        <p *ngIf="item.status =='success'" class="text-success"> status : {{item?.status}} </p>
+        <p *ngIf="item.status =='decline'" class="text-danger"> status : {{item?.status}} </p>
+        <p *ngIf="item.status =='cashout'" class="text-warning"> status : {{item?.status}} </p>
+        <p  *ngIf="item?.trax =='paid'"  class="text-success"> tansaction : {{item?.trax}} </p>
+        <p  *ngIf="item?.trax !='paid'"> tansaction : {{item?.trax}} </p>
+=======
+        <p class="font-weight-bold" *ngIf="item.amount" >₦{{item?.amount}} </p>
+        <p class="font-weight-bold" *ngIf="item.mobile_amount"  >₦{{item?.mobile_amount}} </p>
+        <p> status : {{item?.status}} </p>
+        <p> tanx id{{item?.trax}} </p>
+>>>>>>> fd6babf481a5f38dfc239a92a203c70c9de79f13
+        <p> {{item?.ref}} </p>
+      </ion-list>
+      
+    </ion-card-content>
+  </ion-card>
+
+</div>
+</ion-content>

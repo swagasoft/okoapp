@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab  vertical="bottom" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+<div class="content">
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="success">
+     <ion-row>
+       <h5 class="mt-2 p-3 font-weight-bold">{{timeMinute}} : {{timeSeconds}} </h5>
+     </ion-row>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-item-divider *ngIf="startGame" >
+         
+    <ion-segment>
+      <div class="animated" #correct>
+      <ion-label  class=" font-weight-bold text-success"> CORRECT : {{correctAns}}</ion-label>
+    </div>
+    </ion-segment>
+
+  
+    <ion-segment >
+      <div class="animated" #wrong >
+      <ion-label class="animated font-weight-bold text-danger">WRONG : {{wrongAns}} </ion-label>
+    </div>
+    </ion-segment>
+</ion-item-divider>
+
+<ion-card *ngIf="startGame" class="m-0 play-area" style="width: 100%;" >
+  <div class="justify-content-right d-flex ml-2 ">
+             <h3 class=" font-weight-bold" id="count"> {{runningQuestion + 1}} </h3>  <!-- Default Segment -->
+  
+  </div>
+   
+   <ion-card-title><p class="m-4 text-white">{{currentQuestion?.question}} </p></ion-card-title>
+   <ion-card-content class="text-left mb-5">
+  
+       <ion-button color="success"  expand="full"  class="option mb-3" [disabled]="disableClick" 
+        (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer);">
+          {{currentQuestion?.option1}} </ion-button>
+     
+         <ion-button color="success" expand="full" class="option mb-3" [disabled]="disableClick"
+          (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); ">
+            {{currentQuestion?.option2}} </ion-button>
+    
+         <ion-button  color="success" expand="full"  class="option mb-3" [disabled]="disableClick"
+         (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); ">
+           {{currentQuestion?.option3}} </ion-button>
+      
+         <ion-button color="success" expand="full"  class="option mb-3" [disabled]="disableClick" 
+          (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); ">
+            {{currentQuestion?.option4}} </ion-button> <br>
+            
+            <ion-text class="text-white text-center"> answer :{{currentQuestion?.answer}} </ion-text> <br>
+            <ion-text class="text-white text-center"> category :{{currentQuestion?.category}} </ion-text>
+   </ion-card-content>
+  <ion-row>
+    <ion-button size="small"  (click)="previousQst()">prev</ion-button> 
+    <ion-button size="small" (click)="nextQuestion()">next</ion-button>
+    <ion-button size="small" color="danger" (click)="cancelGame()">Stop</ion-button>
+  </ion-row>
+   </ion-card>
+
+   
+   <div *ngIf="!loadingGame" style="padding-top: 40%;">
+    <ion-button expand="block" 
+      size="large" color="success"  *ngIf="!startGame" (click)="startQuestion()">
+        PLAY NOW !</ion-button>
+        <div class=" text-center  p-2 mt-5 animated infinite
+         shake  " #info> 
+          <p class="info"  *ngIf="!startGame">15 correct questions equal to 50k</p>
+        </div>
+ </div>
+
+          <!-- loader -->
+          <div *ngIf="loadingGame" class=" ">
+            <div class="toast-container ">
+                <div class="lds-roller"><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div></div>
+            </div>
+            <p class="bg-dark text-white text-center"> preparing questions</p>
+          </div>
+
+        </div>
+</ion-content>

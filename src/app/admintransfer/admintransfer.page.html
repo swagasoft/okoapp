@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-fab  vertical="top" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+ 
+
+  <div class="content pt-5">
+      <!-- loader -->
+      <div *ngIf="loading" class=" ">
+          <div class="toast-container ">
+              <div class="lds-roller"><div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div></div>
+          </div>
+        </div>
+
+        <ion-card class="card" *ngFor="let item of manualTransfer">
+<<<<<<< HEAD
+          <ion-header><h1 class="text-center text-white"> ₦ {{item?.amount}} </h1> </ion-header>
+=======
+          <ion-header><h1 class="text-center text-white"> ₦ {{item.mobile_amount}} </h1> </ion-header>
+          
+>>>>>>> fd6babf481a5f38dfc239a92a203c70c9de79f13
+          <ion-list>
+            <h6>{{item.username}} </h6>
+            <h6>status : {{item.status}} </h6>
+            <h6>ID:{{item.account_id}} </h6>
+            <h6>{{item.date | date:'full'}} </h6>
+            <h6>{{item.trax}} </h6>
+            <ion-col>
+              <ion-row>
+            <ion-button color="success"(click)="confirmUser(item._id)" > CONFIRM</ion-button>
+            <ion-button color="danger"(click)="declineAlert(item._id, item.amount, item.username)" > DECLINE</ion-button>
+          </ion-row>
+          </ion-col>
+          </ion-list>
+        </ion-card>
+        <!-- <ion-card  class="text-white mt-5 p-3 bg-dark text-center">
+          <ion-card-content>No manual transfer has been made. </ion-card-content>
+        </ion-card> -->
+
+  </div>
+</ion-content>

@@ -1,0 +1,119 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <img class="rounded-top"  src="../../assets/icon/Logoicon.png">
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="content">
+
+
+    <ion-card class="login-form" class="px-lg-5 ">
+
+      <ion-card-content>
+
+        <ion-card-header>
+          <ion-card-subtitle></ion-card-subtitle>
+          <ion-card-title class="font-weight-bold  white-text text-center py-1">
+          </ion-card-title>
+        </ion-card-header>
+
+
+        <form class="form" #loginForm ngform="loginForm" name="loginForm" (submit)="register()" >
+          <div *ngIf="loading">
+            <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          </div>
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Phone</ion-label>
+            <ion-input #number name="number" position="floating" [(ngModel)]="model.number" type="number" required
+              minlength="11" [pattern]="phoneRegex" ngControl="title"></ion-input>
+          </div>
+
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Username</ion-label>
+            <ion-input #username name="username" position="floating" [(ngModel)]="model.username" type="text" required
+              ngControl="title"></ion-input>
+          </div>
+
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Password</ion-label>
+            <ion-input #password name="password" position="floating" [(ngModel)]="model.password" type="password"
+              required ngControl="title"></ion-input>
+          </div>
+
+          <div class="text-input mb-2">
+            <ion-label class="ml-3" position="floating">Confirm password</ion-label>
+            <ion-input #con_password name="password" position="floating" [(ngModel)]="model.conf_password"
+              type="password" required ngControl="title"></ion-input>
+          </div>
+
+          <ion-button class="mt-4" expand="full" type="submit" class="text-white" color="success">Submit</ion-button>
+        </form>
+        <!-- [disabled]="!number.value || !username.value || !password.value || !con_password.value" -->
+
+        <div class="justify-content-center row">
+          <p class="text-white"> I already have account <ion-chip color="light" class="font-weight-bold "
+              [routerLink]="['/login']"> login</ion-chip>
+          </p>
+        </div>
+
+
+      </ion-card-content>
+    </ion-card>
+    <div id="snackbar" *ngIf="userService.networkDisconnet">No internet connection</div>
+
+  </div>
+
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="alert"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-button color="success">
+        <a class=" info text-white" [routerLink]="['/testimonials']">
+          <ion-icon name="trophy"></ion-icon> TESTIMONIALS
+        </a>
+      </ion-button>
+      <ion-button color="success">
+        <a class=" info text-white" [routerLink]="['/howtoplay']">
+          <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
+        </a>
+      </ion-button>
+      <ion-button color="success">
+        <a class=" info text-white" [routerLink]="['/contactus']">
+          <ion-icon name="chatbubbles"></ion-icon> CONTACT US
+        </a>
+      </ion-button>
+      <ion-button color="success">
+        <a class="info text-white  " href="https:/i-sabi.com/faq/">
+          <ion-icon name="help"></ion-icon> FAQ
+        </a>
+      </ion-button>
+      <ion-button color="success">
+        <a class="info text-white  " href="https:/i-sabi.com/privacy-policy-2/">
+          <ion-icon name="list"></ion-icon> POLICY
+        </a>
+      </ion-button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+
+  
+        <!-- loader -->
+        <div *ngIf="loading" class=" ">
+          <div class="toast-container ">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+</ion-content>

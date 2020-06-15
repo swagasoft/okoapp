@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="gamesection"></ion-back-button>
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="../../../assets/icon/Logoicon.png" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <ion-col>
+      <div>
+        <ion-card class="d-flex text justify-content-center text-white">
+          <h3>₦ {{accountService.accountBalance | number}}</h3>
+          <div #bal class="animated pl-5" (click)="reloadBalance()">
+            <ion-icon name="wallet" size="large"></ion-icon>refresh
+          </div>
+        </ion-card>
+      </div>
+    </ion-col>
+
+    <ion-col>
+      <div>
+        <ion-card class="d-flex text justify-content-center text-white">
+          <ion-card class="border-light text-white">
+            <ion-card-title class="text-white"> Transfer</ion-card-title>
+            <ion-card-content>0</ion-card-content>
+          </ion-card>
+
+          <ion-card class="border-light text-white">
+            <ion-card-title class=" text-white"> Success</ion-card-title>
+            <ion-card-content>0</ion-card-content>
+          </ion-card>
+        </ion-card>
+      </div>
+    </ion-col>
+
+    <ion-col>
+      <ion-card>
+        <ion-card-title>
+          <ion-card-content>
+            <form class=" form" #tranferForm ngform="transferForm" name="form" (submit)="transferMoney()">
+              <h1 class="text-center font-weight-bold text-white mb-4">
+                Tranfer fund
+              </h1>
+              <div *ngIf="loading">
+                <ion-progress-bar type="indeterminate"></ion-progress-bar>
+              </div>
+              <div class="text-input mb-2">
+                <ion-label class="ml-3" position="floating">Username</ion-label>
+                <ion-input class="ml-3" type="text" #username name="username" clearInput [(ngModel)]="model.username"
+                  autocomplete="off" required="true"></ion-input>
+              </div>
+
+              <div class="text-input mb-2">
+                <ion-label class="ml-3" position="floating">Confirm username</ion-label>
+                <ion-input  class="ml-3" type="text" input #username_conf name="username_conf"
+                  [(ngModel)]="model.conf_username" required="true">
+                </ion-input>
+              </div>
+              <div class="text-input mb-2">
+                <ion-label class="ml-3" position="floating">Amount</ion-label>
+                <ion-input  class="ml-3" type="number" input #amount name="amount"
+                  [(ngModel)]="model.amount" required="true">
+                </ion-input>
+              </div>
+
+              <div class="justify-content-center row pt-2">
+                <ion-button size="small" [disabled]="!username.value || !username_conf.value || !amount.value" 
+                 type="submit" color="light" (submit)="transferMoney()">
+                  <p style="color: #00351a;" class="font-weight-bold">Send</p>
+                </ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+        </ion-card-title>
+      </ion-card>
+    </ion-col>
+
+       <!-- loader -->
+       <div *ngIf="loading" class=" ">
+        <div class="toast-container ">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+  </div>
+</ion-content>

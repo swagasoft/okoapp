@@ -1,0 +1,112 @@
+
+ <ion-header>
+    <ion-toolbar>
+      <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content> 
+<div class="content">
+    <ion-tabs>
+        <ion-tab-bar slot="top">
+          <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+      
+        </ion-tab-bar>
+      </ion-tabs>
+
+
+  
+    <!-- <h1> content area</h1> -->
+    <h2 class="text-center font-weight-bold" id="demo" > Question Upload</h2>
+
+   <ion-card>
+     <!-- select category -->
+     <ion-item>
+      <ion-label>Caegories</ion-label> 
+      <ion-select  (ngModelChange)="selectChange($event)"  [(ngModel)]="model.mlistOptions">
+        <ion-select-option value="economics">Economics</ion-select-option>
+        <ion-select-option value="sport">Sport</ion-select-option>
+        <ion-select-option value="movie">Movie</ion-select-option>
+        <ion-select-option value="science">Science</ion-select-option>
+        <ion-select-option value="history">History</ion-select-option>
+        <ion-select-option value="politics">Politics</ion-select-option>
+        <ion-select-option value="arts">Art</ion-select-option>
+        <ion-select-option value="tourism">Tourism</ion-select-option>
+      </ion-select>
+
+      
+    </ion-item>
+   </ion-card>
+    <form #questionForm="ngForm" (submit)="submit(questionForm)"  >
+    <ion-card>
+  <ion-item>
+    <ion-label>Question</ion-label>
+    <ion-textarea rows="6" cols="20" name="question" [(ngModel)]="questionModel.question"
+     placeholder="Enter question here" clearOnEdit required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+    <ion-card>
+  <ion-item>
+    <ion-label>Answer</ion-label>
+    <ion-textarea  placeholder="Enter answer here..." name="answer" [(ngModel)]="questionModel.answer" 
+     required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+    <ion-card>
+  <ion-item>
+    <ion-label>Option-1</ion-label>
+    <ion-textarea  placeholder="enter option 1" name="option1" [(ngModel)]="questionModel.option1"
+    required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+    <ion-card>
+  <ion-item>
+    <ion-label>Opion-2</ion-label>
+    <ion-textarea  placeholder="enter option 2" name="option2" [(ngModel)]="questionModel.option2"
+     required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+    <ion-card>
+  <ion-item>
+    <ion-label>option-3</ion-label>
+    <ion-textarea  placeholder="enter option 3" name="option3" [(ngModel)]="questionModel.option3"
+    required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+    <ion-card>
+  <ion-item>
+    <ion-label>Option-4</ion-label>
+    <ion-textarea  placeholder="enter option 4" name="option4" [(ngModel)]="questionModel.option4"
+     required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+    
+    <ion-card>
+  <ion-item>
+    <ion-label>Tip</ion-label>
+    <ion-textarea  placeholder="enter tip here..." name="tip" [(ngModel)]="questionModel.tip"
+    required="true" spellcheck="true"></ion-textarea>
+  </ion-item>
+    </ion-card>
+
+
+    <!-- loader -->
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+          <div class="lds-roller"><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div></div>
+
+      </div>
+
+    </div>
+
+    
+    <ion-button type="submit" color="success">Submit</ion-button>
+  </form>
+</div>
+</ion-content>

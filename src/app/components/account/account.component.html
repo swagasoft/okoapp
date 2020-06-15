@@ -1,0 +1,306 @@
+<header></header>
+
+    <ion-content>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://js.paystack.co/v1/paystack.js"></script>
+
+       <!-- fab placed to the top end -->
+     <ion-fab [routerLink]="['/gamesection']" vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button   color="light">
+        <ion-icon  name="logo-game-controller-b"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="content">
+        <!-- content area -->
+        <div>
+            <ion-card class="text-center">
+                <ion-card-header color="success" class="font-weight-bold text-white"> PAYMENT</ion-card-header>
+                <ion-card-content>
+                    <div class="text-center"> <ion-badge>{{appUsername}} </ion-badge> </div>
+                  <!-- <img class="banks" src="../../../assets/img/banks.png" alt=""> -->
+                    <div class="col p-5 d-flex justify-content-center">
+                    <img class="wallet" src="assets/icon/wallet_icon.png">
+                    </div>
+                    <ion-badge>
+                      
+                    </ion-badge>
+                    <h4 class="text-center mb-5 font-weight-bold"> AVAILABLE BALANCE <ion-badge>
+                      : ₦  
+                      {{accountService.accountBalance | number}}
+                    </ion-badge> </h4>
+
+                     
+                        <ion-row class="d-flex justify-content-center">
+                          <!-- pay now -->
+                     <div *ngIf="!showPaymentButtons" class="pr-4 row d-flex justify-content-center">
+                      <ion-button (click)="enterAmountInput()"  color="success">DEPOSIT</ion-button>
+                     </div>
+                     <div *ngIf="!showPaymentButtons" class=" pl-4 row d-flex justify-content-center">
+                      <ion-button (click)="enterCashoutAmount()"  color="success">CASHOUT</ion-button>
+                     
+                     </div>
+                   
+                        </ion-row>
+
+                        <!-- <ion-list>
+                          <ion-item *ngFor="let item of scheduled">
+                            <ion-label text-wrap>
+                              {{item.id}} {{item.title}}
+                              <p>Trigger : {{item.trigger | json}}</p>
+                            </ion-label>
+                            
+                          </ion-item>
+                        </ion-list> -->
+                     
+
+                     
+                     
+                     <div *ngIf="showPaymentButtons">
+
+                     
+                     <ion-chip *ngIf="showPaymentButtons">
+                      <h1 class="text-center font-weight-bold">I want to pay ₦ {{model.amount}} </h1>
+                    </ion-chip> <br>
+                    <!-- pay stack -->
+
+                    <!-- <angular-rave
+                    [customer_email] = "appUsername +'@i-sabi.com'"
+                    [customer_phone] = "'08090909090'"
+                    [amount]="amountInput"
+                    [key]= "'FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X'"
+                    [currency]="'NGN'"
+                    [custom_title]="'i-sabi credit'"
+                    [txref]="reference"
+                    (callback)="paymentDone($event)"
+                    (close)="paymentCancel()"
+                  >pay wave</angular-rave> -->
+
+                            <button
+                          angular-rave
+                          [raveOptions]="RaveOptions"
+                          [customer_email] = "appUsername+'@i-sabi.com'"
+                          [customer_phone] = "'08190909090'"
+                          [txref]="reference"
+                          [amount]="amountInput"
+                          [currency]="'NGN'"
+                          (close)="paymentCancel()"
+                        >
+                          PAY WITH WAVE
+                        </button>
+
+                     <!-- break line -->
+                  <hr>
+                  <ion-card class="green darken-3">
+                    <ion-card-subtitle class="text-center text-white"> Banks Cards</ion-card-subtitle>
+                    <ion-row>
+                      <ion-col class="justify-content-center">
+                    <button color="success" (click)="payNow()"
+                    angular4-paystack
+                    [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                    [email]="appUsername +'@i-sabi.com'"
+                    [amount]="amountInput"
+                    [ref]="reference"
+                    [channels]="['card']"
+                    [class]="'btn btn-primary'"
+                    (close)="paymentCancel()"
+                    (callback)="paymentDone($event)"
+                  > 
+                    <img src="../../../assets/banks/visa.gif">
+                   Visa card/ verve
+                    </button>
+                  </ion-col>
+                   
+                  <ion-col class="justify-content-center">
+                    <button color="success" (click)="payNow()"
+                    angular4-paystack
+                    [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                    [email]="appUsername +'@i-sabi.com'"
+                    [amount]="amountInput"
+                    [ref]="reference"
+                    [channels]="['card']"
+                    [class]="'btn btn-primary'"
+                    (close)="paymentCancel()"
+                    (callback)="paymentDone($event)"
+                  >
+                  <img src="../../../assets/banks/mastercard.jpg">
+                   Mastercard
+                    </button>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+                  <!-- break line -->
+     
+
+                  <ion-card class="green darken-3">
+                    <ion-card-subtitle class="text-center text-white"> ussd/QR-code transfer</ion-card-subtitle>
+                  <ion-row>
+                    <ion-col class="justify-content-center">
+                      <button color="success" (click)="payNow()"
+                      angular4-paystack
+                      [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                      [email]="appUsername +'@i-sabi.com'"
+                      [amount]="amountInput"
+                      [ref]="reference"
+                      [channels]="['ussd']"
+                      [class]="'btn btn-primary'"
+                      (close)="paymentCancel()"
+                      (callback)="paymentDone($event)"
+                    >
+                    <img src="../../../assets/banks/GTBank-737.png">
+                     Gtb ussd
+                      </button>
+                      </ion-col>
+
+                      <ion-col class="justify-content-center">
+                        <button color="success" (click)="payNow()"
+                        angular4-paystack
+                        [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                        [email]="appUsername +'@i-sabi.com'"
+                        [amount]="amountInput"
+                        [ref]="reference"
+                        [channels]="['qr']"
+                        [class]="'btn btn-primary'"
+                        (close)="paymentCancel()"
+                        (callback)="paymentDone($event)"
+                      >
+                      <img src="../../../assets/banks/qr-code.png">
+                       QR-code transfer
+                        </button>
+                        </ion-col>
+                  </ion-row>
+                </ion-card>
+
+                  <!-- break line -->
+                  <hr>
+
+                  <ion-card class="green darken-3">
+                    <ion-card-subtitle  class="text-center text-white"> INTERNET BANKING</ion-card-subtitle>
+                  <ion-row>
+                    <ion-col class="justify-content-center">
+                      <button color="success" (click)="payNow()"
+                      angular4-paystack
+                      [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                      [email]="appUsername +'@i-sabi.com'"
+                      [amount]="amountInput"
+                      [ref]="reference"
+                      [channels]="['bank']"
+                      [class]="'btn btn-primary'"
+                      (close)="paymentCancel()"
+                      (callback)="paymentDone($event)"
+                    >
+                    <img src="../../../assets/banks/gtbank.jpg">
+                     Gtbank
+                      </button>
+                      </ion-col>
+                      
+                      <ion-col class="justify-content-center">
+                        <button color="success" (click)="payNow()"
+                        angular4-paystack
+                        [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                        [email]="appUsername +'@i-sabi.com'"
+                        [amount]="amountInput"
+                        [ref]="reference"
+                        [channels]="['bank']"
+                        [class]="'btn btn-primary'"
+                        (close)="paymentCancel()"
+                        (callback)="paymentDone($event)"
+                      >
+                      <img src="../../../assets/banks/firstbank.jpg">
+                       First Bank
+                        </button>
+                        </ion-col>
+                  </ion-row>
+
+                  <!-- break -->
+                  <hr>
+
+                  <ion-row>
+                    <ion-col class="justify-content-center">
+                      <button color="success" (click)="payNow()"
+                      angular4-paystack
+                      [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                      [email]="appUsername +'@i-sabi.com'"
+                      [amount]="amountInput"
+                      [ref]="reference"
+                      [channels]="['bank']"
+                      [class]="'btn btn-primary'"
+                      (close)="paymentCancel()"
+                      (callback)="paymentDone($event)"
+                    >
+                    <img src="../../../assets/banks/zenith.png">
+                     Zenith Bank
+                      </button>
+                      </ion-col>
+
+                      <ion-col class="justify-content-center">
+                        <button color="success" (click)="payNow()"
+                        angular4-paystack
+                        [key]="'pk_live_ab3b66d51a2b80225ad4bf58456d7d9dea43c69e'"
+                        [email]="appUsername +'@i-sabi.com'"
+                        [amount]="amountInput"
+                        [ref]="reference"
+                        [channels]="['bank']"
+                        [class]="'btn btn-primary'"
+                        (close)="paymentCancel()"
+                        (callback)="paymentDone($event)"
+                      >
+                      <img src="../../../assets/banks/uba.gif">
+                       Uba Bank
+                        </button>
+                        </ion-col>
+                  </ion-row>
+                </ion-card>
+                  <!-- breal -->
+                  <hr>
+
+                  <ion-card class="green darken-3">
+                    <ion-card-header class="text-center text-white">MANUAL TRANSFER</ion-card-header>
+                 
+                  <ion-row>
+                      <ion-col class="justify-content-center">
+                        <button color="success" (click)="mobileTransfer()">
+                          <img width="50"  src="../../../assets/banks/manual.png">
+                         Manual Transfer
+                        </button>
+                      </ion-col>
+                  </ion-row>
+                </ion-card>
+
+
+                      
+                  
+
+                      
+                       
+                  </div>
+                
+                    <!--end of  pay stack -->
+
+
+                  
+
+
+                </ion-card-content>
+            
+            </ion-card>
+        </div>
+       
+    
+    <div>
+        <ion-card class="text-center">
+            <ion-card-header color="success" class="font-weight-bold text-white "> ACCOUNT</ion-card-header>
+            <ion-card-content>
+                <div class="col p-5 d-flex justify-content-center">
+                <img class="wallet" src="assets/icon/profile_icon.png">
+                </div>
+                <h4 color="success" class="text-center fint-weight-bold"> UPDATE YOUR INFORMATION</h4>
+                <ion-button color="success" (click)="profileSection()" >UPDATE</ion-button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+  </div>
+
+  <div></div>
+    </ion-content>
+    

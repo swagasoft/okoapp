@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="gamesection"></ion-back-button>
+    </ion-buttons>
+    <ion-img class="rounded-top" src="../../assets/icon/Logoicon.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+
+  <div class="content text-white">
+    <!-- <h1> content area</h1> -->
+    <ion-button class="" (click)="addQuestion()">Add question</ion-button> <br>
+    <ion-chip>
+      <h6 class="text-white"> LIVE : {{liveQuestions}} questions </h6>
+    </ion-chip>
+
+    <div *ngIf="manage_section">
+      <ion-card>
+        <!-- select filter -->
+        <ion-item *ngIf="showContent">
+          <ion-label>Filter</ion-label>
+          <ion-select interface="popover" (ngModelChange)="selectChange($event)" [(ngModel)]="model.filterOptions">
+            <ion-select-option value="economics">Economics</ion-select-option>
+            <ion-select-option value="sport">Sport</ion-select-option>
+            <ion-select-option value="movie">Movie</ion-select-option>
+            <ion-select-option value="science">Science</ion-select-option>
+            <ion-select-option value="history">History</ion-select-option>
+            <ion-select-option value="politics">Politics</ion-select-option>
+            <ion-select-option value="arts">Art</ion-select-option>
+            <ion-select-option value="tourism">Tourism</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+ 
+      <ion-card>
+        <ion-row>
+          <ion-item>
+          <ion-input name="search" #search placeholder="search question words"  [(ngModel)]="model.search"></ion-input> 
+          <ion-button (click)="searchQst()" [disabled]="!search.value">search</ion-button>
+        </ion-item>
+        </ion-row>
+      </ion-card>
+
+      <!-- loader -->
+      <div *ngIf="loading" class=" ">
+        <div class="toast-container ">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>
+
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="showContent">
+        <ion-card>
+          <ion-card-header class="font-weight-bold"> Total :{{questionsOutPut?.length}} </ion-card-header>
+        </ion-card>
+
+        <ion-card class="text-white" *ngFor="let item of questionsOutPut">
+          <div class="row display-flex justify-content-center">
+            <ion-checkbox *ngIf="item.status" color="primary" [checked]="item.status"
+              (click)="changeStatusFalse(item._id, item.category)"></ion-checkbox>
+
+            <ion-checkbox *ngIf="!item.status" color="primary" [checked]="item.status"
+              (click)="changeStatusTrue(item._id, item.category)"></ion-checkbox>
+            <ion-card-header class="text-left text-white"> Display : {{item.status}} </ion-card-header>
+            <ion-card-header class="text-right text-white"> Category : {{item.category}} </ion-card-header>
+          </div>
+          <ion-card-title class="text-white">
+            <p><strong>Question :</strong> {{item.question}} </p>
+          </ion-card-title>
+          <ion-card-content> 
+            <strong> option-1 :</strong> {{item.option1}}
+          </ion-card-content>
+          <ion-card-content>
+            <strong> option-2 :</strong> {{item.option2}}
+          </ion-card-content>
+          <ion-card-content>
+            <strong> option-3 :</strong> {{item.option3}}
+          </ion-card-content>
+          <ion-card-content>
+            <strong> option-4 :</strong> {{item.option4}}
+          </ion-card-content>
+          <ion-card-content>
+            <strong>Answer</strong> {{item.answer}}
+          </ion-card-content>
+          <ion-card-content>
+            <strong>Tip</strong> {{item.tip}}
+          </ion-card-content>
+          <div class="row d-flex">
+            <ion-card-content class="col">
+              <ion-icon name="create" (click)="editQuestion(item._id)" size="large" color="primary"></ion-icon>
+            </ion-card-content>
+            <ion-card-content class="col">
+              <ion-icon name="trash" (click)="deleteQestion(item._id, item.category)" size="large" color="danger">
+              </ion-icon>
+            </ion-card-content>
+          </div>
+        </ion-card>
+
+      </div>
+
+      <!-- end page content -->
+      <div>
+
+
+
+
+        <!-- edit question form -->
+        <div *ngIf="showForm">
+          <h6 class="text-center">Edit question</h6>
+          <form class="mb-5" #questionForm="ngForm" (submit)="updateQuestion(questionForm, questionToEdit._id)">
+            <ion-card>
+              <ion-item>
+                <ion-label>Question</ion-label>
+                <ion-textarea rows="6" cols="20" name="question" [(ngModel)]="questionModel.question"
+                  placeholder="Enter question here" [value]="questionToEdit?.question" clearOnEdit required="true"
+                  spellcheck="true"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>Answer</ion-label>
+                <ion-textarea placeholder="Enter answer here..." [value]="questionToEdit?.answer" name="answer"
+                  [(ngModel)]="questionModel.answer" required="true" spellcheck="true"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>Option-1</ion-label>
+                <ion-textarea placeholder="enter option 1" name="option1" [(ngModel)]="questionModel.option1"
+                  required="true" spellcheck="true" [value]="questionToEdit?.option1"></ion-textarea>
+              </ion-item>
+
+            </ion-card>
+            <ion-card>
+              <ion-item>
+                <ion-label>Opion-2</ion-label>
+                <ion-textarea placeholder="enter option 2" name="option2" [(ngModel)]="questionModel.option2"
+                  required="true" spellcheck="true" [value]="questionToEdit?.option2"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>option-3</ion-label>
+                <ion-textarea placeholder="enter option 3" name="option3" [(ngModel)]="questionModel.option3"
+                  required="true" spellcheck="true" [value]="questionToEdit?.option3"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>Option-4</ion-label>
+                <ion-textarea placeholder="enter option 4" name="option4" [(ngModel)]="questionModel.option4"
+                  required="true" spellcheck="true" [value]="questionToEdit?.option4"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>Tip</ion-label>
+                <ion-textarea placeholder="enter tip here..." name="tip" [(ngModel)]="questionModel.tip" required="true"
+                  spellcheck="true" [value]="questionToEdit?.tip"></ion-textarea>
+              </ion-item>
+            </ion-card>
+
+            <ion-button type="submit" color="success">Submit</ion-button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--  tabs -->
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="manageSection()" >
+        <ion-icon name="help"></ion-icon>
+        <ion-label>Manage questions</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="searchSection()" >
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Search question</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="allLiveSection()">
+        <ion-icon name="help"></ion-icon>
+        <ion-label> All live</ion-label>
+      </ion-tab-button>
+  
+    </ion-tab-bar>
+  </ion-tabs> -->
+</ion-content>

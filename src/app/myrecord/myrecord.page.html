@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      
+      <div class="row d-flex justify-content-center">
+        <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+        </div>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+ 
+  <!-- fab placed to the top end -->
+  <ion-fab [routerLink]="['/gamesection']" vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button  color="light">
+        <ion-icon  name="logo-game-controller-b"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <!-- content area -->
+    <div class="">
+     <!-- loader -->
+     <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+          <div class="lds-roller"><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
+
+    <ion-item  class="text-center font-weight-bold"> 
+      <ion-badge color="success" class="text-center">GAME LIST</ion-badge> <ion-badge color="success">{{gameRecord?.length}} </ion-badge>  </ion-item>
+    <div  *ngFor="let item of gameRecord; index as i" class="content">
+      <ion-card class=" text-center  play-record">
+        <!-- text-center  play-record animated fadeInLeft delay-{{i}}s -->
+        <div class="d-flex">
+          <ion-list-header class="font-weight-bold  justify-content-left">
+             {{i + 1}} </ion-list-header>
+          <ion-row class="font-weight-bold justify-content-center">
+             {{item.Date | date:'shortDate' }},{{item.Date | date: 'mediumTime'}}</ion-row>
+          <ion-row>
+            <ion-button [disabled]="item.correct_qst == 15" color="light" 
+             (click)="deleteRecord(item._id)" class="justify-content-right">
+              <ion-icon color="danger" size="large" name="trash"></ion-icon>
+            </ion-button>
+
+          </ion-row>
+        </div>  
+        
+        <ion-list class="font-weight-bold"> ENLAPSED  {{item.minutes}} , min {{item.seconds}} seconds </ion-list>
+        <ion-list *ngIf="item.correct_qst == 15;" class="font-weight-bold text-danger nominated" > NOMININATED !</ion-list>
+
+        <ion-row class="d-flex justify-content-center">
+          <p class="text-success "><ion-icon color="sucess" size="large" name="checkmark"></ion-icon> {{item.correct_qst}}</p>
+
+          <p class="text-danger "><ion-icon color="danger" size="large" name="close-circle-outline"></ion-icon> {{item.wrong_qst}}</p>
+        </ion-row>
+       
+      </ion-card>
+    </div>
+   
+    <!-- end content area -->
+  </div>
+
+</ion-content>

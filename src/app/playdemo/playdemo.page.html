@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <div class="row d-flex justify-content-center">
+      <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <div class="content">
+    <ion-fab  vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button color="success">
+         <ion-row>
+           <h5 class="mt-2 p-3 font-weight-bold">{{timeMinute}} : {{timeSeconds}} </h5>
+         </ion-row>
+        </ion-fab-button>
+      </ion-fab>
+
+      
+      <ion-item-divider >
+          <ion-segment class="">
+              <ion-label class="font-weight-bold text-success"> CORRECT : {{correctAns}}</ion-label>
+            </ion-segment>
+            <ion-segment class="" >
+              <ion-label class="font-weight-bold text-danger">WRONG : {{wrongAns}} </ion-label>
+            </ion-segment>
+      </ion-item-divider>
+
+      
+
+      <!-- question section -->
+      <ion-card *ngIf="startGame"  class="m-0 play-area" style="width: 100%;" >
+          <div class="justify-content-right d-flex ml-2 ">
+                     <h3 class=" font-weight-bold" id="count"> {{runningQuestion + 1}}/15 </h3>  <!-- Default Segment -->
+          
+          </div>
+           
+           <ion-card-title><p class="m-4">{{currentQuestion?.question}} </p></ion-card-title>
+           <ion-card-content class="text-left mb-5">
+          
+               <ion-list  expand="full"  class="option text-white" 
+                (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer);">
+                 A : {{currentQuestion?.option1}} </ion-list>
+             
+                 <ion-list  expand="full" class="option text-white" 
+                  (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); ">
+                   B : {{currentQuestion?.option2}} </ion-list>
+             
+           
+                 <ion-list  expand="full"  class="option text-white" 
+                 (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); ">
+                  C : {{currentQuestion?.option3}} </ion-list>
+             
+              
+                 <ion-list  expand="full"  class="option text-white"  
+                  (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); ">
+                   D : {{currentQuestion?.option4}} </ion-list>
+             
+                     <div class=" mt-3 d-flex justify-content-center row">
+                        <ion-chip color="secondary"> <ion-icon  class="mr-5" name="arrow-dropleft">
+                        </ion-icon></ion-chip> 
+                     </div>
+                     
+ 
+           </ion-card-content>
+           </ion-card>
+
+           <div >
+              <ion-button class="mt-5" expand="block" color="success"  *ngIf="!startGame" (click)="startQuestion()">
+                  PLAY DEMO !</ion-button>
+           </div>
+
+
+           <br> 
+           <div> 
+              <div *ngIf="correctAns !=15">
+                  <div class="justify-content-center d-flex" *ngIf="!startGame">
+                      <!-- <iframe src="../../assets//animation/animated-fail.gif" alt=""></iframe> -->
+                  </div>
+               </div>
+               <div *ngIf="correctAns ==15">
+                  <div class="justify-content-center d-flex" *ngIf="!startGame">
+                   <!-- <video src="../../assets/animation/animated-firework.gif"></video> -->
+                      <br>
+                      <div class="text-center"> <h4 id="nominated"> NOMINATED! </h4>
+                         <ion-icon size="large" color="warning" name="trophy"></ion-icon> </div>
+                  </div>
+               </div>
+           </div>
+          </div>
+
+</ion-content>

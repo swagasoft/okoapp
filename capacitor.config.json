@@ -1,0 +1,21 @@
+{
+  "appId": "ayawesoft.swagasoft",
+  "appName": "i-sabi",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "18",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "1000",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "ShowSplashScreen": "true",
+      "AutoHideSplashScreen": "false",
+      "SplashScreenDelay": "1000"
+    }
+  }
+}

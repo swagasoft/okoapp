@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <div class="content text-white">
+
+    <ion-segment >
+    <ion-segment-button [routerLink]="['/gamesection']">
+      <ion-label ><ion-icon size="large" name="home"></ion-icon> </ion-label>
+    </ion-segment-button>
+    <ion-segment-button  [routerLink]="['/manage-questions']">
+      <ion-label >  <ion-icon size="large" name="help"></ion-icon> </ion-label>
+    </ion-segment-button>
+    <ion-segment-button  [routerLink]="['/payouts']">
+      <ion-label ><ion-icon size="large"  name="wallet"></ion-icon> </ion-label>
+    </ion-segment-button>
+    <ion-segment-button  [routerLink]="['/admin-account']">
+      <ion-label><ion-icon size="large"  name="people"></ion-icon></ion-label>
+    </ion-segment-button>
+  </ion-segment>
+    <!-- content -->
+</div>
+</ion-content>

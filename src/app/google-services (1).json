@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "76166240437",
+    "firebase_url": "https://i-sabi-773b4.firebaseio.com",
+    "project_id": "i-sabi-773b4",
+    "storage_bucket": "i-sabi-773b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76166240437:android:e0d830142081e34f1186fc",
+        "android_client_info": {
+          "package_name": "ayawiesoft.swagasoft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76166240437-ejotmv1aq24gpk4mikokac27f613b9uv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHNDX0FiTctj3ZdowHVdYxs01IarlZuGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76166240437-ejotmv1aq24gpk4mikokac27f613b9uv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

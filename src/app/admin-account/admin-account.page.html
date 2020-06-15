@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-fab  vertical="top" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+
+  <!--  tabs -->
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="dateSection()" >
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>App date</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="smsSection()">
+        <ion-icon name="mail"></ion-icon>
+        <ion-label>SMS</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="videoSection()">
+        <ion-icon name="play"></ion-icon>
+        <ion-label>Video link</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button [routerLink]="['/admin-event']" >
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Event</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <!-- end tabs -->
+
+
+    <br>
+    <ion-badge class="text-center">{{gameService.applicationDate}} </ion-badge>
+    
+    <div *ngIf="date_section" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
+      <form #dateform name="dateform" (submit)="submitDate(dateform)">
+        <ion-item>
+            <ion-label  class="ml-3"  
+             position="floating">enter date in format</ion-label>
+          <ion-input #setdate name="setdate" [(ngModel)]="model.date" placeholder="jan 5, 2019 06:00:00"></ion-input>
+         </ion-item>
+         <ion-button type="submit"> <ion-icon name="checkmark" size="large"></ion-icon> </ion-button>
+        </form>
+
+         <!-- <p class="text-white text-center font-weight-bold">jan 5, 2019 06:00:00</p> -->
+         <ion-button size="large" [disabled]="!setdate.value"
+          (click)="activateDate()">ACTIVATE </ion-button>
+    </div>
+
+
+    <!-- video form -->
+    <div *ngIf="video_section">
+    <form #youtubeform name="youtubeform" (submit)="submityoutubeLink(youtubeform)">
+      <ion-item>
+          <ion-label  class="ml-3"  
+           position="floating">enter date in format</ion-label>
+        <ion-input #youtubeUrl name="youtubeUrl" [(ngModel)]="model.youtubeUrl" placeholder="https://....."></ion-input>
+       </ion-item>
+       <ion-button type="submit"> submit youtube link </ion-button>
+      </form>
+    </div>
+      <!-- end video form -->
+
+      <!-- sms section -->
+      <div *ngIf="sms_section" style="padding-top: 40px;">
+        <form #smsform id="smsform" name="youtubeform" (submit)="submitSms(smsform)">
+          <ion-item >
+            <textarea rows="5" cols="40" placeholder="Enter sms here..." #sms name="sms" [(ngModel)]="model.sms" placeholder="Enter sms here" ></textarea>
+           </ion-item>
+           <ion-button type="submit" [disabled]="!sms.value"> SEND</ion-button>
+          </form>
+        </div>
+        <!-- end sms section -->
+       
+      
+    <div *ngIf="loading">
+      <ion-spinner slot="middle"></ion-spinner>
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+      <p class="p-5 bg-dark text-white">loading </p>
+    </div>
+
+
+
+
+</ion-content>

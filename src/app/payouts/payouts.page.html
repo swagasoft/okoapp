@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <ion-card class="pt-5">
+      <div class="runner-up" *ngFor="let item of leaderBoard; index as i">
+        <ion-list class="grey lighten-4 p-2">
+          <ion-row class=" winner lighten-2 p-2">
+            <ion-col> 
+              <ion-icon color="success" size="large" name="person"></ion-icon>
+              <ion-chip class="position green lighten-2 font-weight-bold  animated infinite rubberBand"
+               > {{i + 1}} </ion-chip>
+            </ion-col>
+            <ion-col>
+              <h6 class=" leader "> {{item.user}} </h6>
+            </ion-col>
+            <ion-col>
+              <small class="time_display text-success font-weight-bold
+                                    "> ELAPSED {{item.minutes}} min : {{item.seconds}} secs </small>
+            </ion-col>
+          </ion-row>
+          <ion-button expand="block" (click)="payWinner(item.user_id, item._id)">pay - {{item.user}} </ion-button>
+        </ion-list>
+       <br>
+      </div>
+    </ion-card>
+  
+  
+     <!-- loader -->
+     <div  *ngIf="loading">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  </ion-content> 

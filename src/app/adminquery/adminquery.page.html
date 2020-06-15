@@ -1,0 +1,95 @@
+
+ <ion-header>
+    <ion-toolbar>
+      <ion-img class="rounded-top"  src="../../assets/icon/Logoicon.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="center" slot="fixed">
+    <ion-button (click)="presentNavigation()" type="block" size="large">Navigation</ion-button>
+  </ion-fab>
+
+
+<div class="content">
+<ion-col>
+    <form class="mt-5 form" #loginForm 
+    ngform="loginForm" name="form"  (submit)="queryUser()">
+    <h1  class="text-center font-weight-bold text-white mb-4">Search User</h1>
+    <div *ngIf="loading"><ion-progress-bar type="indeterminate"></ion-progress-bar></div>
+     <ion-item  class="text-input mb-2">
+         <ion-label class="ml-3" position="floating">Enter username</ion-label>
+         <ion-input class="ml-3 " type="text" #username name="username" clearInput [(ngModel)]="model.query"
+           required="true"  ></ion-input>
+     </ion-item>
+   
+   
+   <div class="justify-content-center row pt-2">
+       <ion-button size="large" [disabled]="!username.value" 
+         type="submit" color="light" (submit)="queryUser()"
+       ><ion-icon size="large" color="success" name="search"></ion-icon> </ion-button>
+   </div>
+   </form>
+  </ion-col>
+
+  <ion-col *ngIf="loading" class="d-fllex justify-content-center row">
+    <!-- Crescent -->
+    <div>
+      <ion-spinner name="crescent" color="light"></ion-spinner>
+    </div>
+    
+  </ion-col>
+
+ 
+
+  <ion-col *ngIf="userDetails" >
+    <ion-card  class="bg-dark  text-center">
+      <ion-card-header>details</ion-card-header>
+      <ion-list>
+        <h4  class="font-weight-bold">  {{userDetails.username}} </h4> <br>
+      </ion-list>
+
+      <ion-list>
+        <p>Balance : # {{userDetails.balance | number }} </p>
+      </ion-list>
+      <ion-list>
+        <p>Role :  {{userDetails.role }} </p>
+      </ion-list>
+      <ion-list>
+        <p>Phone : {{userDetails.phone }} </p>
+      </ion-list>
+      <ion-list>
+        <p>ID :  {{userDetails.user_id }} </p>
+      </ion-list>
+    </ion-card>
+  </ion-col>
+
+<ion-col *ngIf="profile">
+  <ion-card class="bg-dark text-center">
+    <ion-card-header>INFO</ion-card-header>
+    <ion-list>
+      <p> Name {{profile.fullname}}</p>
+    </ion-list>
+    <ion-list>
+      <p> Nationality {{profile.nationality}}</p>
+    </ion-list>
+     <ion-list>
+      <p> Account No :  {{profile.acount_number}}</p>
+     </ion-list>
+      <ion-list>
+        <p> Account Name :  {{profile.account_name}}</p>
+      </ion-list>
+      <ion-list>
+        <p> Bank : {{profile.bank}}</p>
+      </ion-list>
+      <ion-list>
+        <p> Email : {{profile.email}}</p>
+      </ion-list>
+   
+  </ion-card>
+
+</ion-col>
+
+
+  </div>
+</ion-content>

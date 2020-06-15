@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-button color="light" (click)="closeModal()">
+    <button >
+      <ion-icon color="danger" name="close"></ion-icon>
+    </button>
+  </ion-button>
+</ion-header>
+
+<ion-content>
+ 
+  <form #eventForm="ngForm" name="eventform" (submit)="eventForm.valid && submitUser()">
+    <h5 class="ion-text-center">CREATE NEW CONTESTANT</h5>
+
+    <div class="ion-text-center ion-padding">
+      <img *ngIf="contesttModel.image_url" [src]="contesttModel.image_url"  alt="image">
+    </div>
+<!--  -->
+      <ion-item color="light">
+          <ion-label position="floating">fullname </ion-label>
+          <ion-input  type="text" #fullname="ngModel" name="fullname" 
+          [(ngModel)]="contesttModel.fullname" required="true"></ion-input>
+    </ion-item>
+    
+      <ion-item color="light">
+          <ion-label position="floating">nickname </ion-label>
+          <ion-input  type="text" #nickname="ngModel" name="nickname" 
+          [(ngModel)]="contesttModel.nickname" required="true"></ion-input>
+    </ion-item>
+
+      <ion-item color="light">
+          <ion-label position="floating">user image url</ion-label>
+          <ion-input  type="text" #image_url="ngModel" name="image_url" 
+          [(ngModel)]="contesttModel.image_url" required="true"></ion-input>
+    </ion-item>
+  
+   <div class="ion-text-center">
+    <ion-button (click)="submitUser()" >create</ion-button>
+   </div>
+  
+
+  </form>
+  
+</ion-content>

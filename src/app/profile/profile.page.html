@@ -1,0 +1,267 @@
+<ion-header>
+    <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      
+      <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+           <!-- fab placed to the top end -->
+<ion-fab [routerLink]="['/gamesection']" vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button   color="light">
+    <ion-icon  name="logo-game-controller-b"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<div class="content">
+   <!-- content area -->
+   <ion-card class="content m-0 p-0">
+      <ion-card-header class="text-center text-white"> MY PROFILE</ion-card-header> 
+      <ion-card-content>
+
+       
+
+
+
+
+<form *ngIf="userRecordNotAvalible"  #profileForm ngform="profileForm" name="form" 
+(submit)="createProfile(profileForm)" class="text-center" >
+<div class="m-3">
+    <p class="text-danger text-center">*Ensure you enter correct details. Records cannot be modified after update</p>
+  </div>
+
+<ion-item>
+<ion-label position="floating">Fullname</ion-label>
+<ion-input #fullname name="fullname" position="floating"  [(ngModel)]="model.fullname"
+type="text" required ></ion-input>
+</ion-item>
+<ion-item>
+<ion-label position="floating">Email</ion-label>
+<ion-input #email name="email" position="floating"  [(ngModel)]="model.email"
+type="email" required  [pattern]="emailRegex"></ion-input>
+</ion-item>
+
+<ion-item>
+<ion-item>
+<ion-label>Nationality</ion-label>
+<ion-select #selectCountry name="selectCountry" interface="popover"  (ngModelChange)="selectChange($event)" 
+[(ngModel)]="setNationality.selectedOption" name="nationality" #nationality>
+<ion-select-option value="Afghanistan">	Afghanistan  </ion-select-option>
+<ion-select-option value="Aland Islands">		Aland Islands  </ion-select-option>
+<ion-select-option value="Albania">		Albania  </ion-select-option>
+<ion-select-option value="Algeria">			Algeria  </ion-select-option>
+<ion-select-option value="American Samoa">	American Samoa </ion-select-option>
+<ion-select-option value="Andorra"> Andorra </ion-select-option>
+<ion-select-option value="Angola"> Angola </ion-select-option>
+<ion-select-option value="Anguilla"> Anguilla</ion-select-option>
+<ion-select-option value="Antarctica">Antarctica</ion-select-option>
+<ion-select-option value="Antigua and Barbuda">Antigua and Barbuda</ion-select-option>
+<ion-select-option value="Argentina">Argentina</ion-select-option>
+<ion-select-option value="Armenia">Armenia</ion-select-option>
+<ion-select-option value="Aruba">Aruba</ion-select-option>
+<ion-select-option value="Australia">Australia</ion-select-option>
+<ion-select-option value="Austria">Austria</ion-select-option>
+<ion-select-option value="Azerbaijan">Azerbaijan</ion-select-option>
+<ion-select-option value="Bahamas">Bahamas</ion-select-option>
+<ion-select-option value="Bahrain">Bahrain</ion-select-option>
+<ion-select-option value="Bangladesh">Bangladesh</ion-select-option>
+<ion-select-option value="Barbados">Barbados</ion-select-option>
+<ion-select-option value="Belarus">Belarus</ion-select-option>
+<ion-select-option value="Belgium">Belgium</ion-select-option>
+<ion-select-option value="Belize">Belize</ion-select-option>
+<ion-select-option value="Republic of Benin">Republic of Benin</ion-select-option>
+<ion-select-option value="Bermuda">Bermuda</ion-select-option>
+<ion-select-option value="Bolivia"> Bolivia</ion-select-option>
+<ion-select-option value="Netherland">Netherland</ion-select-option>
+<ion-select-option value="Botswana">Botswana</ion-select-option>
+<ion-select-option value="Brazil">Brazil</ion-select-option>
+<ion-select-option value="Bulgaria">Bulgaria</ion-select-option>
+<ion-select-option value="Burundi">Burundi</ion-select-option>
+<ion-select-option value="Cambodia">Cambodia</ion-select-option>
+<ion-select-option value="Canada">Canada</ion-select-option>
+<ion-select-option value="Chad">Chad</ion-select-option>
+<ion-select-option value=" Chile"> Chile</ion-select-option>
+<ion-select-option value="China">China</ion-select-option>
+<ion-select-option value="Colombia">Colombia</ion-select-option>
+<ion-select-option value="Costa Rica">Costa Rica</ion-select-option>
+<ion-select-option value="Cote d'Ivoire">Cote d'Ivoire</ion-select-option>
+<ion-select-option value="Croatia">Croatia</ion-select-option>
+<ion-select-option value="Cuba">Cuba</ion-select-option>
+<ion-select-option value="Curacao">Curacao</ion-select-option>
+<ion-select-option value="Czech Republic">Czech Republic</ion-select-option>
+<ion-select-option value="Congo">Congo</ion-select-option>
+<ion-select-option value="Denmark">Denmark</ion-select-option>
+<ion-select-option value="Ecuador">Ecuador</ion-select-option>
+<ion-select-option value="Egypt">Egypt</ion-select-option>
+<ion-select-option value="England">England</ion-select-option>
+<ion-select-option value="Guinea">Guinea</ion-select-option>
+<ion-select-option value="Estonia">Estonia</ion-select-option>
+<ion-select-option value="Ethiopia">Ethiopia</ion-select-option>
+<ion-select-option value="Finland">Finland</ion-select-option>
+<ion-select-option value="Gambia">Gambia</ion-select-option>
+<ion-select-option value="Germany">Germany</ion-select-option>
+<ion-select-option value="Ghana">Ghana</ion-select-option>
+<ion-select-option value="Honduras">Honduras</ion-select-option>
+<ion-select-option value="Hong Kong">Hong Kong</ion-select-option>
+<ion-select-option value="Hungary">Hungary</ion-select-option>
+<ion-select-option value="Iceland">Iceland</ion-select-option>
+<ion-select-option value="India">India</ion-select-option>
+<ion-select-option value="Indonesia">Indonesia</ion-select-option>
+<ion-select-option value="Iran">Iran</ion-select-option>
+<ion-select-option value="Iraq">Iraq</ion-select-option>
+<ion-select-option value="Ireland">Ireland</ion-select-option>
+<ion-select-option value="Israel">Israel</ion-select-option>
+<ion-select-option value="Italy">Italy</ion-select-option>
+<ion-select-option value="Jamaica">Jamaica</ion-select-option>
+<ion-select-option value="Japan">Japan</ion-select-option>
+<ion-select-option value="Kazakhstan">Kazakhstan</ion-select-option>
+<ion-select-option value="Kenya">Kenya</ion-select-option>
+<ion-select-option value="Kuwait">Kuwait</ion-select-option>
+<ion-select-option value="Latvia">Latvia</ion-select-option>
+<ion-select-option value="Lebanon">Lebanon</ion-select-option>
+<ion-select-option value="Lesotho">Lesotho</ion-select-option>
+<ion-select-option value="Liberia">Liberia</ion-select-option>
+<ion-select-option value="Libya">Libya</ion-select-option>
+<ion-select-option value="Lithuania">Lithuania</ion-select-option>
+<ion-select-option value="Luxembourg">Luxembourg</ion-select-option>
+<ion-select-option value="Macedonia">Macedonia</ion-select-option>
+<ion-select-option value="Madagascar">Madagascar</ion-select-option>
+<ion-select-option value="Malawi">Malawi</ion-select-option>
+<ion-select-option value="Malaysia">Malaysia</ion-select-option>
+<ion-select-option value="Mali">Mali</ion-select-option>
+<ion-select-option value="Malta">Malta</ion-select-option>
+<ion-select-option value="Mauritania">Mauritania</ion-select-option>
+<ion-select-option value="Mauritius">Mauritius</ion-select-option>
+<ion-select-option value="Mexico">Mexico</ion-select-option>
+<ion-select-option value="Moldova">Moldova</ion-select-option>
+<ion-select-option value="Morocco">Morocco</ion-select-option>
+<ion-select-option value="Mozambique">Mozambique</ion-select-option>
+<ion-select-option value="Mozambique">Mozambique</ion-select-option>
+<ion-select-option value="Namibia">Namibia</ion-select-option>
+<ion-select-option value="Netherlands">Netherlands</ion-select-option>
+<ion-select-option value="New Zealand">New Zealand</ion-select-option>
+<ion-select-option value="Niger">Niger</ion-select-option>
+<ion-select-option value="Nigeria">Nigeria</ion-select-option>
+<ion-select-option value="Republic of Korea">Republic of Korea</ion-select-option>
+<ion-select-option value="Norway">Norway</ion-select-option>
+<ion-select-option value="Pakistan">Pakistan</ion-select-option>
+<ion-select-option value="Panama">Panama</ion-select-option>
+<ion-select-option value="Paraguay">Paraguay</ion-select-option>
+<ion-select-option value="Philippines">Philippines</ion-select-option>
+<ion-select-option value="Peru">Peru</ion-select-option>
+<ion-select-option value="Philippines">Philippines</ion-select-option>
+<ion-select-option value="Poland">Poland</ion-select-option>
+<ion-select-option value="Portugal">Portugal</ion-select-option>
+<ion-select-option value="Qatar">Qatar</ion-select-option>
+<ion-select-option value="Congo">Congo</ion-select-option>
+<ion-select-option value="Romania">Romania</ion-select-option>
+<ion-select-option value="Russia">Russia</ion-select-option>
+<ion-select-option value="Rwanda">Rwanda</ion-select-option>
+<ion-select-option value="Scotland">Scotland</ion-select-option>
+<ion-select-option value="Senegal">Senegal</ion-select-option>
+<ion-select-option value="Serbia">Serbia</ion-select-option>
+<ion-select-option value="Seychelles">Seychelles</ion-select-option>
+<ion-select-option value="Sierra Leone">Sierra Leone</ion-select-option>
+<ion-select-option value="Singapore">Singapore</ion-select-option>
+<ion-select-option value="Slovakia">Slovakia</ion-select-option>
+<ion-select-option value="Slovenia">Slovenia</ion-select-option>
+<ion-select-option value="South Africa">South Africa</ion-select-option>
+<ion-select-option value="South Korea">South Korea</ion-select-option>
+<ion-select-option value="Sudan">Sudan</ion-select-option>
+<ion-select-option value="Spain">Spain</ion-select-option>
+<ion-select-option value="Sri Lanka">Sri Lanka</ion-select-option>
+<ion-select-option value="Sudan">Sudan</ion-select-option>
+<ion-select-option value="Swaziland">Swaziland</ion-select-option>
+<ion-select-option value="Sweden">Sweden</ion-select-option>
+<ion-select-option value="Switzerland">Switzerland</ion-select-option>
+<ion-select-option value="Taiwan">Taiwan</ion-select-option>
+<ion-select-option value="Tanzania">Tanzania</ion-select-option>
+<ion-select-option value="Togo">Togo</ion-select-option>
+<ion-select-option value="Tunisia">Tunisia</ion-select-option>
+<ion-select-option value="Turkey">Turkey</ion-select-option>
+<ion-select-option value="Uganda">Uganda</ion-select-option>
+<ion-select-option value="Ukraine">Ukraine</ion-select-option>
+<ion-select-option value="United Arab Emirates">United Arab Emirates</ion-select-option>
+<ion-select-option value="USA">USA</ion-select-option>
+<ion-select-option value="Uruguay">Uruguay</ion-select-option>
+<ion-select-option value="Venezuela">Venezuela</ion-select-option>
+<ion-select-option value="Vietnam">Vietnam</ion-select-option>
+<ion-select-option value="Wales">Wales</ion-select-option>
+<ion-select-option value="Zambia">Zambia</ion-select-option>
+<ion-select-option value="Zimbabwe">Zimbabwe</ion-select-option>
+</ion-select>
+</ion-item>
+</ion-item>
+
+<ion-item>
+<ion-label position="floating">Bank</ion-label>
+<ion-input #bank name="bank" position="floating" [(ngModel)]="model.bank"
+type="text" required  ></ion-input>
+</ion-item>
+
+<ion-item>
+<ion-label position="floating">Bank Acount number</ion-label>
+<ion-input #bank_number name="bank_number" position="floating" [(ngModel)]="model.accountNumber"
+type="text" required  ></ion-input>
+</ion-item>
+
+<ion-item>
+<ion-label position="floating">Bank Acount name</ion-label>
+<ion-input #bank_acount_name name="bank_acount_number" position="floating" [(ngModel)]="model.accountName"
+type="text" required  ></ion-input>
+</ion-item>
+
+<ion-button expand="full" type="submit" [disabled]="!bank.value || setNationality.selectedOption.length == 0
+|| !fullname.value || !bank_number.value "
+class="text-white" color="success" >Submit</ion-button>       
+</form>
+
+
+<!-- display user record -->
+<ion-item *ngIf="myProfile"  class="text-uppercase">
+  <ion-list>
+    <h6> FULLNAME : <p class="text-success"> {{myProfile?.fullname}}</p>  </h6>
+ 
+  <br>
+ 
+    <h6> email : <p class="text-success">{{myProfile?.email}}</p>  </h6>
+ 
+  <br>
+  
+    <h6> nationality : <p class="text-success"> {{myProfile?.nationality}}</p>  </h6>
+  
+  <br>
+ 
+    <h6> bank : <p class="text-success">{{myProfile?.bank}}</p>  </h6>
+  
+  <br>
+    <h6> bank user name : <p class="text-success"> {{myProfile?.account_name}}</p>  </h6>
+  
+  <br>
+ 
+    <h6> accountnumber : <p class="text-success">{{myProfile?.acount_number}} </p> </h6>
+ 
+  <br>
+  
+    <h6> created : <p class="text-success"> {{myProfile?.date | date}}</p>  </h6>
+  </ion-list>
+</ion-item>
+
+
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+
+      </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>
